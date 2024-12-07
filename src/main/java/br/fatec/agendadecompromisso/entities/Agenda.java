@@ -2,10 +2,13 @@ package br.fatec.agendadecompromisso.entities;
 
 import java.io.Serializable;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+
+@Entity
 public class Agenda implements Serializable{
 
     @Id
@@ -52,7 +55,7 @@ public class Agenda implements Serializable{
         this.local = local;
     }
 
-    
+
     @Override
     public int hashCode() {
         final int prime = 31;

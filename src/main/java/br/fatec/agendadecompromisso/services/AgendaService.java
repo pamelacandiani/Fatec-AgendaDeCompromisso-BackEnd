@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.fatec.agendadecompromisso.dto.AgendaRequest;
 import br.fatec.agendadecompromisso.dto.AgendaResponse;
 import br.fatec.agendadecompromisso.entities.Agenda;
 import br.fatec.agendadecompromisso.mappers.AgendaMapper;
@@ -26,8 +27,22 @@ public class AgendaService {
         Agenda agenda = repository.findById(id).orElseThrow(
             () -> new EntityNotFoundException("Compromisso não registrado")
         );
-        
+
         return AgendaMapper.toDTO(agenda);
+    }
+
+    public void delete(Long id){
+        if (repository.existsById(id)) {
+            repository.deleteById(id);
+        }
+        else{
+            throw new EntityNotFoundException("Compromisso não registrado");
+        }
+    }
+
+    public AgendaResponse save(AgendaRequest agenda){
+        Agenda newAgenda = repository.save(AgendaMapper.toEntity(agenda));
+        return AgendaMapper.toDTO(newAgenda);
     }
 
 }
